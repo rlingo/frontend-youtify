@@ -28,8 +28,11 @@ function Login() {
     setErrMsg('');
   }, [emailInput, passwordInput])
 
+  const [isSubmitting, setIsSubmitting] = useState(false)
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsSubmitting(true);
     try {
       const response = await axios.post(LOGIN_URL,
         JSON.stringify({ email: emailInput, password: passwordInput }),
@@ -37,8 +40,10 @@ function Login() {
           headers: { 'Content-Type': 'application/json' },
           withCredentials: true
         });
+      setIsSubmitting(false);
       navigate('/');
     } catch (err) {
+      setIsSubmitting(false);
       if (!err?.response) {
         console.log(err)
         toast.error('No Server Response');
@@ -82,7 +87,12 @@ function Login() {
               placeholder='Enter Password'
             />
             <div className='d-flex w-100 justify-content-center w-100%'>
-              <button className='btn btn-color rounded-pill mb-2 mt-4 w-50'>Log In</button>
+              <button
+                disabled={!emailInput || !passwordInput || isSubmitting}
+                className='btn btn-color rounded-pill mb-2 mt-4 w-50'
+              >
+                {isSubmitting ? 'Logging In...' : 'Log In'}
+              </button>
             </div>
             <div className='d-flex flex-column justify-content-center align-items-center'>
               <p className='text-center mt-2'>Do not have an account yet?</p>

@@ -19,6 +19,8 @@ const Register = () => {
     const errRef = useRef();
     const checkboxRef = useRef();
 
+    const [loading, setLoading] = useState(false);
+
     const [emailInput, setEmailInput] = useState('');
     const [validEmailInput, setValidEmailInput] = useState(false);
     const [emailInputFocus, setEmailInputFocus] = useState(false);
@@ -37,14 +39,6 @@ const Register = () => {
     const [checkboxChecked, setCheckboxChecked] = useState(false);
     const [showTermsModal, setShowTermsModal] = useState(false);
     const [showPrivacyModal, setShowPrivacyModal] = useState(false);
-
-    const handleLinkClick = (type) => {
-        if (type === 'terms') {
-            setShowTermsModal(true);
-        } else if (type === 'privacy') {
-            setShowPrivacyModal(true);
-        }
-    }
 
     useEffect(() => {
         if (userInputRef.current) {
@@ -68,6 +62,13 @@ const Register = () => {
         setErrMsg('');
     }, [emailInput, passwordInput, confirmPasswordInput])
 
+    const handleLinkClick = (type) => {
+        if (type === 'terms') {
+            setShowTermsModal(true);
+        } else if (type === 'privacy') {
+            setShowPrivacyModal(true);
+        }
+    }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -78,6 +79,9 @@ const Register = () => {
             setErrMsg("Invalid Entry");
             return;
         }
+
+        setLoading(true);
+
         try {
             const response = await axios.post(REGISTER_URL,
                 JSON.stringify({ email: emailInput, password: passwordInput }),
@@ -96,6 +100,8 @@ const Register = () => {
                 toast.error('Registration failed.');
             }
             errRef.current.focus();
+        } finally {
+            setLoading(false); // Stop loading, whether request succeeds or fails
         }
     }
 
@@ -202,10 +208,11 @@ const Register = () => {
 
                         <div className='d-flex w-100 justify-content-center w-100%'>
                             <button
-                                disabled={!validEmailInput || !validPasswordInput || !confirmPasswordMatched || !checkboxChecked ? true : false}
+                                // disabled={!validEmailInput || !validPasswordInput || !confirmPasswordMatched || !checkboxChecked ? true : false}
+                                disabled={!validEmailInput || !validPasswordInput || !confirmPasswordMatched || !checkboxChecked || loading}
                                 className='btn btn-color rounded-pill mb-2 mt-4 w-50'
                             >
-                                Sign Up
+                                {loading ? 'Signing Up...' : 'Sign Up'}
                             </button>
                         </div>
 
