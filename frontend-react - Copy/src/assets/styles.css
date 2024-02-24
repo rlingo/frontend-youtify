@@ -1,0 +1,234 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Jockey+One&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+.form-container {
+    width: 25%;
+}
+
+.c-bg {
+    background-color: #1e1e1e;
+}
+
+.h-bg {
+    background-color: #0e0e0e;
+    position: absolute;
+}
+
+.header-link {
+    text-decoration: none;
+    font-family: "Jockey One", sans-serif;
+    font-weight: 700;
+}
+
+.t-font {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 700;
+}
+
+.i-bg {
+    background-color: #686868;
+    border-color: transparent;
+    font-family: "Montserrat", sans-serif;
+    color: #AEAEAE;
+}
+
+.i-bg::placeholder {
+    color: #AEAEAE;
+}
+
+.link-color {
+    color: #C70000;
+    text-decoration: none;
+}
+
+.link-color:hover {
+    color: #F70000;
+}
+
+
+
+.btn-color {
+    background-color: #C70000;
+    color: white;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 700;
+    border-color: transparent;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.btn-color:hover {
+    background-color: #F70000;
+    /* Change hover background color */
+    border-color: transparent;
+    /* Remove border color on hover */
+}
+
+
+@media screen and (max-width: 1500px) {
+    .form-container {
+        width: 50%;
+    }
+
+    .h-bg {
+        position: static;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .form-container {
+        width: 80%;
+    }
+
+    .h-bg {
+        position: static;
+    }
+}
+
+
+
+/* Hide the default checkbox */
+.checkbox-container input[type="checkbox"] {
+    display: none;
+}
+
+/* Style the custom checkbox */
+.checkbox-container label {
+    position: relative;
+    display: inline-flex;
+    width: 20px;
+    height: 20px;
+    background-color: transparent;
+}
+
+/* Style the custom checkbox when unchecked */
+.checkbox-container label::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 20px;
+    height: 20px;
+    border: 1px solid red;
+    /* Set the border color to red */
+}
+
+/* Style the custom checkbox when checked */
+.checkbox-container input[type="checkbox"]:checked+label::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 10px;
+    height: 10px;
+    background-color: red;
+    /* Set the check color to red */
+}
+
+
+.instructions {
+    font-size: 0.75rem;
+    border-radius: 0.5rem;
+    background-color: #2a2a2a;
+    color: white;
+    padding: 0.50rem;
+    position: relative;
+    bottom: -10px;
+}
+
+.instructions>svg {
+    margin-right: 0.25rem;
+}
+
+.offscreen {
+    position: absolute;
+    left: -9999px;
+}
+
+.hide {
+    display: none;
+}
+
+.valid {
+    color: limegreen;
+    margin-left: 0.25rem;
+}
+
+.invalid {
+    color: red;
+    margin-left: 0.25rem;
+}
+
+.errmsg {
+    background-color: lightpink;
+    color: firebrick;
+    font-weight: bold;
+    padding: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.line {
+    display: inline-block;
+}
+
+/* CSS for Modal */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    max-width: 40%;
+    max-height: 80%;
+    overflow-y: auto;
+    color: black;
+}
+
+.modal-inner {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.modal-body {
+    flex-grow: 1;
+}
+
+.modal-footer {
+    margin-top: 10px;
+    text-align: right;
+}
+
+.close-button {
+    background-color: red;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    padding: 8px 16px;
+    border-radius: 5px;
+    outline: none;
+    align-self: flex-end;
+    margin-top: 10px;
+}
+
+.modal-title {
+    color: black;
+    font-size: 24px;
+    margin-bottom: 15px;
+}
+
+.modal-content p {
+    line-height: 1.6;
+}
